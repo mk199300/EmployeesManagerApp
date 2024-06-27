@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -21,11 +22,11 @@
         </Grid.ColumnDefinitions>
         <WrapPanel Grid.Row="1" Grid.Column="1" Margin="0, 15, 0, 15">
             <TextBlock Text="Filter by:" Margin="10, 0, 10, 0" ></TextBlock>
-            <ComboBox Name="ComboBoxFilterCategory" Width="120" SelectedItem="Role in company" Margin="10, 0, 10, 0"></ComboBox>
+            <ComboBox Name="ComboBoxFilterCategory" Width="120" ItemsSource="{Binding rules}" SelectedItem="Role in company" Margin="10, 0, 10, 0" SelectionChanged="ComboBoxFilterCategory_SelectionChanged_1"></ComboBox>
             <TextBlock Text="Select option" Margin="10, 0, 10, 0"></TextBlock>
             <ComboBox Name="ComboBoxFilterOptions" Width="120" Margin="10, 0, 10, 0"></ComboBox>
         </WrapPanel>
-        <DataGrid Name="CandidateDataGrid" Grid.Row="2" Grid.Column="1"></DataGrid>
+        <DataGrid Name="CandidateDataGrid" ItemsSource="{Binding EmployeesToDisplay}" Grid.Row="2" Grid.Column="1" SelectionChanged="CandidateDataGrid_SelectionChanged"></DataGrid>
         <Button Name="AddButton" Grid.Row="3" Grid.Column="1" Width="80" Margin="10, 13, 10, 13" Click="Button_Click">Add</Button>
     </Grid>
 </Window>

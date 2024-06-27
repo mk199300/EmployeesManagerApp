@@ -48,7 +48,7 @@
         <TextBox Name="JobTitleTextBox" Grid.Row="8" Grid.Column="2" Margin="13"></TextBox>
         <TextBox Name="PhoneNumberTextBox" Grid.Row="9" Grid.Column="2" Margin="13"></TextBox>
         <TextBox Name="MailAddressTextBox" Grid.Row="10" Grid.Column="2" Margin="13"></TextBox>
-        <Button Name="AddButton" Click="AddButton_Click" Content="Add" Grid.Row="11" Grid.Column="1" Margin="10"></Button>
+        <Button Name="AddButton" Click="AddButton_Click" SourceUpdated="{Binding }" Content="Add" Grid.Row="11" Grid.Column="1" Margin="10"></Button>
         <Button Name="FinishButton" Content="Finish" Click="FinishButton_Click" Grid.Row="11" Grid.Column="2" Margin="10"></Button>
     </Grid>
 </Window>
