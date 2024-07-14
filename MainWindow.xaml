@@ -24,7 +24,7 @@
             <TextBlock Text="Filter by:" Margin="10, 0, 10, 0" ></TextBlock>
             <ComboBox Name="ComboBoxFilterCategory" Width="120" ItemsSource="{Binding rules}" SelectedItem="Role in company" Margin="10, 0, 10, 0" SelectionChanged="ComboBoxFilterCategory_SelectionChanged_1"></ComboBox>
             <TextBlock Text="Select option" Margin="10, 0, 10, 0"></TextBlock>
-            <ComboBox Name="ComboBoxFilterOptions" Width="120" Margin="10, 0, 10, 0"></ComboBox>
+            <ComboBox Name="ComboBoxFilterOptions" Width="120" Margin="10, 0, 10, 0" SelectionChanged="ComboBoxFilterOptions_SelectionChanged"></ComboBox>
         </WrapPanel>
         <DataGrid Name="CandidateDataGrid" ItemsSource="{Binding EmployeesToDisplay}" Grid.Row="2" Grid.Column="1" SelectionChanged="CandidateDataGrid_SelectionChanged"></DataGrid>
         <Button Name="AddButton" Grid.Row="3" Grid.Column="1" Width="80" Margin="10, 13, 10, 13" Click="Button_Click">Add</Button>

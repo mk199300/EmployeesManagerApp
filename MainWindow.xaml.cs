@@ -39,8 +39,7 @@ namespace UI
             PropertyChanged(this, new PropertyChangedEventArgs("EmployeesToDisplay"));
             rules = employyeBL.Rules();
             PropertyChanged(this, new PropertyChangedEventArgs("rules"));
-            //CandidateDataGrid.ItemsSource = employeeManagerBL.GetAllEmployee();
-            //ComboBoxFilterOptions.ItemsSource = employeeManagerBL.GetAllJobTitle();
+            
         }
         bl employyeBL=new bl();
 
@@ -69,9 +68,13 @@ namespace UI
             {
                 rule = (string)e.AddedItems[0];
             }
-            //string rule=e.;
             EmployeesToDisplay = new ObservableCollection<Employee>(ListOfEmployees.Where(x => x.RoleInCompany == rule));
             PropertyChanged(this, new PropertyChangedEventArgs("EmployeesToDisplay"));
+        }
+
+        private void ComboBoxFilterOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
