@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BL;
+using Dal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,10 +20,23 @@ namespace UI
     /// Interaction logic for FindCandidate.xaml
     /// </summary>
     public partial class FindCandidate : Window
-    {
+    { public List<string> candidates { get; set; }
+      public List<Interview> listOfInterviews { get; set; }
+
         public FindCandidate()
         {
             InitializeComponent();
+            candidates = employyeBL.Candidates();
+            for (int i = 0; i < candidates.Count; ++i)
+            {
+                ComboBoxItem newItem = new ComboBoxItem();
+                newItem.Content = candidates[i];
+                ComboboxChooseCandidate.Items.Add(newItem);
+            }
+            listOfInterviews = employyeBL.Interviews(ComboboxChooseCandidate.SelectionBoxItem.ToString());
         }
+        bl employyeBL = new bl();
+        
+
     }
 }

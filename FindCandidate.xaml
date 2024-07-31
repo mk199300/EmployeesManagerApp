@@ -22,6 +22,6 @@
             <TextBlock Margin="13">Choose candidate:</TextBlock>
             <ComboBox Name="ComboboxChooseCandidate" Margin="13" Width="200"></ComboBox>
         </WrapPanel>
-        <DataGrid Name="DataGridInterviews" Grid.Row="2" Grid.Column="1"/>
+        <DataGrid Name="DataGridInterviews" ItemsSource="{Binding listOfInterviews}" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </Window>

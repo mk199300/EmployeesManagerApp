@@ -28,5 +28,6 @@
         </WrapPanel>
         <DataGrid Name="CandidateDataGrid" ItemsSource="{Binding EmployeesToDisplay}" Grid.Row="2" Grid.Column="1" SelectionChanged="CandidateDataGrid_SelectionChanged"></DataGrid>
         <Button Name="AddButton" Grid.Row="3" Grid.Column="1" Width="80" Margin="10, 13, 10, 13" Click="Button_Click">Add</Button>
+        <Button Name="CandidateButton" Grid.Row="3" Grid.Column="2" Width="80" Margin="17,13,17,0" Click="Button_Candidate_Click" Height="22" VerticalAlignment="Top">Candidates</Button>
     </Grid>
 </Window>

@@ -19,58 +19,64 @@ using System.Windows.Shapes;
 
 namespace UI
 {
-    delegate bool Check(Employee e);
+    public delegate bool Check(Employee e);
     /// <summary>
     /// Interaction logic for AddEmployee.xaml
     /// </summary>
     public partial class AddEmployee : Window
     {
-        public List<string> rules { get; set; }
-        public ObservableCollection<Employee> ListOfEmployees { get; set; }
-        public ObservableCollection<Employee> EmployeesToDisplay { get; set; }
+        public event Check EventCheck;
+        public List<string> rules{ set; get; }
+       
         public AddEmployee()
         {
             InitializeComponent();
-            EmployeesToDisplay = new ObservableCollection<Employee>(employyeBL.AllEmployees());
             rules = employyeBL.Rules();
-            //PropertyChanged(this, new PropertyChangedEventArgs("rules"));
+            for (int i = 0; i < rules.Count; ++i)
+            {
+                ComboBoxItem newItem = new ComboBoxItem();
+                newItem.Content = rules[i];
+                JobTitleTextBox.Items.Add(newItem);
+            }
+
         }
         bl employyeBL = new bl();
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (!Utilities.CheckIdValidation(IdTextBox.Text))
             {
                 MessageBox.Show("Invalid Id");
             }
-            if (!Utilities.CheckNameValidation(FirstNameTextBox.Text))
+            else if (!Utilities.CheckNameValidation(FirstNameTextBox.Text))
             {
                 MessageBox.Show("Invalid First Name");
             }
-            if (!Utilities.CheckNameValidation(LastNameTextBox.Text))
+            else if (!Utilities.CheckNameValidation(LastNameTextBox.Text))
             {
                 MessageBox.Show("Invalid Last Name");
             }
-            if (!Utilities.CheckAgeValidation(AgeTextBox.Text))
+            else if (!Utilities.CheckAgeValidation(AgeTextBox.Text))
             {
                 MessageBox.Show("Invalid Age");
             }
-            if (!Utilities.CheckStartYearValidation(StartOfWorkingYearTextBox.Text))
+            else if (!Utilities.CheckStartYearValidation(StartOfWorkingYearTextBox.Text))
             {
                 MessageBox.Show("Invalid Start Of Working Year");
             }
-            if (!Utilities.CheckPhoneValidation(PhoneNumberTextBox.Text))
+            else if (!Utilities.CheckPhoneValidation(PhoneNumberTextBox.Text))
             {
                 MessageBox.Show("Invalid Phone Number");
             }
-            if (!Utilities.EmailValidation(MailAddressTextBox.Text))
+            else if (!Utilities.EmailValidation(MailAddressTextBox.Text))
             {
                 MessageBox.Show("Invalid Email");
             }
-
-            MessageBox.Show("Employee added Successfully");
-            this.Close();
+            else
+            {
+                EventCheck(new Employee(int.Parse(IdTextBox.Text), FirstNameTextBox.Text, LastNameTextBox.Text, int.Parse(AgeTextBox.Text), int.Parse(StartOfWorkingYearTextBox.Text), CityAddressTextBox.Text, StreetAddressTextBox.Text, JobTitleTextBox.SelectionBoxItem.ToString(), PhoneNumberTextBox.Text, MailAddressTextBox.Text));
+                MessageBox.Show("Employee added Successfully");
+                this.Close();
+            }
         }
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
@@ -85,13 +91,7 @@ namespace UI
 
         private void JobTitleTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string rule = string.Empty;
-            if (e.AddedItems.Count == 1)
-            {
-                rule = (string)e.AddedItems[0];
-            }
-            EmployeesToDisplay = new ObservableCollection<Employee>(ListOfEmployees.Where(x => x.RoleInCompany == rule));
-            PropertyChanged(this, new PropertyChangedEventArgs("EmployeesToDisplay"));
+           
         }
     }
     

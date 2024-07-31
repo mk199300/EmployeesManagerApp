@@ -48,9 +48,25 @@ namespace UI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AddEmployee addEmployeeWin = new AddEmployee();
+            addEmployeeWin.EventCheck += AddEmployeeWin_EventCheck;
             addEmployeeWin.ShowDialog();
         }
-        
+
+        private bool AddEmployeeWin_EventCheck(Employee e)
+        {
+           bool result= employyeBL.AddEmployee(e);
+            EmployeesToDisplay = new ObservableCollection<Employee>(employyeBL.AllEmployees());
+            PropertyChanged(this, new PropertyChangedEventArgs("EmployeesToDisplay"));
+            return result;
+        }
+
+        private void Button_Candidate_Click(object sender, RoutedEventArgs e)
+        {
+            FindCandidate candidateWin = new FindCandidate();
+            candidateWin.ShowDialog();
+        }
+
+
         private void ComboBoxFilterCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
